@@ -1,0 +1,65 @@
+Specifications
+--------------
+
+* User can submit a song, how many songs is dependent on admin choice
+* Logs submissions votes per IP, can require account creation with Facebook, Twitter, or Google
+* Song submission: Artist, Song Title, YouTube link
+* can vote on songs, with how many #'s to choose based on admin (vote on 3 songs)
+* creates admin URL, so instead of logging in, just go to the URL
+
+* admin:
+    - determines how many songs users can vote on
+    - determines if users can see results
+    - determine if users can see who submitted which songs
+    - determines how many songs user can submit
+    - determines if votes are weighted
+    - can view results
+    - can make new poll out of current song leaders
+    - determine if poll is still open or closed
+
+* app:
+	- domain.com/song-submission/
+		:: view current/past polls
+	- domain.com/song-submission/admin
+		:: admin page, log in here to view all polls, manage polls - one admin account, but each poll has their own admin link so multiple people can administrate it
+	- domain.com/song-submission/poll-11-10-2013
+		:: view poll from that date
+	- domain.com/song-submission/poll-11-10-2013/ei23kdk98
+		:: admin page
+
+* database:
+	- mongodb/song-submission{
+		admin: { username: admin, password: hashed },
+		polls: {[
+			{ 
+			  name: Poll 1, 
+			  created: Date, 
+			  closes: Date,
+			  
+			  options: [
+			  	{
+			  		songID: asd123sa
+			  		songTitle: "Hey Jude",
+			  		songArtist: "The Beatles",
+			  		youTubeLink: "http://youtube.com/v/fdsa"
+			  	}],
+			  
+			  users: [
+			  	{
+			  		ipAddress: "192.168.1.1",
+			  		name: "Kevin",
+			  	}],
+			  
+			  votes: [
+			  	{
+			  		songID: asdf123asdf
+			  		userID: qqwer123234qwer
+			  		weight: 3/2/1
+			  	}]
+		   }
+
+
+		]}
+
+	}
+
