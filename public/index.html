@@ -103,7 +103,8 @@
               </li>
 
             </ul>
-            <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px">Submit your votes</button>
+            <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes</button> 
+            <div ng-show="songs.length<11" style="margin-top:10px;"> (Voting disabled until all 11 songs are submitted)</span></div>
           </div>
           
 
