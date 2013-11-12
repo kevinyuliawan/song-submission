@@ -58,70 +58,77 @@
 
       <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <p>Please choose your top 3 songs by putting a 3 next to the one you want <strong>the most</strong>, followed by 2 and then 1 for your remaining choices. Leave all the other songs at zero as the votes will all be added up in the end. 
-          <p>Also, be sure to submit a song if you haven't done so already, and make sure you include a YouTube/SoundCloud/something link so that we can easily click and listen to the song. Make sure you include the "http://" part in the beginning.
-            <p>And please only submit a song and your votes <strong>once</strong>! The site doesn't stop you from doing so but there are server logs, you NF.
+        <ul>
+        <li>Please choose your top 3 songs by putting a 3 next to the one you want <strong>the most</strong>, followed by 2 and then 1 for your remaining choices. </li>
+        <li>Leave all the other songs at zero as the votes will all be added up in the end. </li>
+        <li>Be sure to submit a song if you haven't done so already, and make sure you include a YouTube/SoundCloud/something link so that we can easily click and listen to the song. </li>
+        <li>Make sure you include the "http://" part in the beginning of the link.</li>
+        <li>Only submit a song and your votes <strong>once</strong>! </li>
+        <li>The site doesn't stop you from doing so, but if you submit more than once, other people won't be able to submit their votes or songs since there's a limit of 11 for each.
+        </ul>
 
-            </div>
+        <button type="button" class="btn btn-success btn-sm" data-dismiss="alert" style="margin:10px 40px; margin-bottom:0px;"><span class="glyphicon glyphicon-check"></span> Yezzir</button>
 
-            <div class="container">
+        </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <ul class="songlist">
-                    <li ng-repeat="song in songs">
-                      <div class="col-md-5">
-                        {{$index+1}}.
-                        <input type="number" ng-model="song.userVote" min="0" max="3" class="input-vote"></input>
-                        <b>{{song.title}}</b> by <b>{{song.artist}}</b>
-                      </div>
-                      <div class="col-md-4">
-                        <span class="glyphicon glyphicon-play"></span> <a ng-href="{{song.link}}" target="_blank">{{song.link}}</a>
-                      </div>
-                    </li>
+        <div class="container">
 
-                  </ul>
-                  <div class="col-md-2">
-                    <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes</button> 
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="songlist">
+                <li ng-repeat="song in songs">
+                  <div class="col-md-5">
+                    {{$index+1}}.
+                    <input type="number" ng-model="song.userVote" min="0" max="3" class="input-vote"></input>
+                    <b>{{song.title}}</b> by <b>{{song.artist}}</b>
                   </div>
-                  <div class="col-md-10">
-                    <div ng-show="songs.length<11" style="margin-top:25px;"> 
-                      (Voting disabled until all 11 songs are submitted)</span>
-                    </div>
-                    <div class="alert alert-danger alert-dismissable" id="voteAlertError" ng-show="voteError" style="margin-top:14px">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      Please make sure you have only voted for 3 songs, and that you voted '3', '2', and '1' once, respectively.
-                    </div>
-                    <div class="alert alert-success alert-dismissable" id="voteAlertShow" ng-show="votesSubmitted" style="margin-top:14px">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <strong>Ooo Sankayoo!</strong> Your votes have been submitted.
-                    </div>
+                  <div class="col-md-4">
+                    <span class="glyphicon glyphicon-play"></span> <a ng-href="{{song.link}}" target="_blank">{{song.link}}</a>
                   </div>
+                </li>
+
+              </ul>
+              <div class="col-md-2">
+                <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes</button> 
+              </div>
+              <div class="col-md-10">
+                <div ng-show="songs.length<11" style="margin-top:25px;"> 
+                  (Voting disabled until all 11 songs are submitted)</span>
+                </div>
+                <div class="alert alert-danger alert-dismissable" id="voteAlertError" ng-show="voteError" style="margin-top:14px">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  Please make sure you have only voted for 3 songs, and that you voted '3', '2', and '1' once, respectively.
+                </div>
+                <div class="alert alert-success alert-dismissable" id="voteAlertShow" ng-show="votesSubmitted" style="margin-top:14px">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <strong>Ooo Sankayoo!</strong> Your votes have been submitted.
                 </div>
               </div>
+            </div>
+          </div>
 
-              <!-- Modal -->
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title" id="myModalLabel">Song Submission</h4>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Song Submission</h4>
+                </div>
+                <div class="modal-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label>Title</label>
+                      <input ng-model="newSong.title" type="text" class="form-control">
                     </div>
-                    <div class="modal-body">
-                      <form role="form">
-                        <div class="form-group">
-                          <label>Title</label>
-                          <input ng-model="newSong.title" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>Artist</label>
-                          <input ng-model="newSong.artist" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>Song link</label>
-                          <input ng-model="newSong.link" type="text" class="form-control" placeholder="e.g. http://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                        </div>
+                    <div class="form-group">
+                      <label>Artist</label>
+                      <input ng-model="newSong.artist" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Song link</label>
+                      <input ng-model="newSong.link" type="text" class="form-control" placeholder="e.g. http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                    </div>
                     <!--
                     <div class="form-group">
                       <label>Your name</label>
