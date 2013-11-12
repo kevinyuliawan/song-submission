@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="poll1">
+	<head>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  	<div ng-controller="PollController">
+  		<ul>
+  			<li ng-repeat="song in songs">
+  				<input type="number" ng-model="song.userVote" min="0" max="3"></input>
+  				<div style="display:inline-block"><b>{{song.title}}</b> by <b>{{song.artist}}</b></div>
+  				<div><b>YouTube link:</b> <a ng-href="{{song.link}}" target="_blank">{{song.link}}</a></div>
+  			</li>
+  		</ul>
+  		<button class="btn" ng-click="submitVote();">Submit votes</button>
+
+
+  		<form><br>
+  			<b>Submit a song</b></br>
+  			<div>Title: <input ng-model="newSong.title" type="text"></input></div>
+  			<div>Artist: <input ng-model="newSong.artist" type="text"></input></div>
+  			<div>YouTube link: <input ng-model="newSong.link" type="text"></input></div>
+        <div>Your name: <input ng-model="newSong.username" type="text"></input></div>
+  			<button class="btn" ng-click="addSong();">Submit song</button>
+  		</form>
+
+  		<br>
+
+  	</div>
+
+    <script src="http://code.angularjs.org/1.2.0/angular.min.js"></script>
+    <script src="poll1.js"></script>
+  </body>
+</html>
