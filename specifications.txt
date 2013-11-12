@@ -6,6 +6,7 @@ Specifications
 * Song submission: Artist, Song Title, YouTube link
 * can vote on songs, with how many #'s to choose based on admin (vote on 3 songs)
 * creates admin URL, so instead of logging in, just go to the URL
+* can play all currently submitted songs in a "playlist" by embedding the videos in an embed, and playing one after the other
 
 * admin:
     - determines how many songs users can vote on
