@@ -59,7 +59,7 @@ angular.module('poll1', [])
 		$scope.addSong = function addSong(){
 			if($scope.newSong.title == "" || $scope.newSong.artist == "" || $scope.newSong.link == ""){
 				$scope.blankError = true;
-				$linkError = false;
+				$scope.linkError = false;
 			}
 			else if($scope.newSong.link.indexOf('http://') == -1){
 				$scope.blankError = false;
@@ -84,7 +84,7 @@ angular.module('poll1', [])
 		$scope.submitVote = function submitVote(){
 			if(checkVotes()){
 				$scope.voteError = false;
-				
+				console.log('vote submitted');
 				$http.post('poll/votes', $scope.songs)
 				.success(function(data, status, headers, config){
 					// Do something successful
@@ -99,6 +99,8 @@ angular.module('poll1', [])
 			}
 			else{
 				$scope.voteError = true;
+				console.log('vote error');
+				
 			}
 		};
 

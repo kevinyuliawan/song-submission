@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <div class="alert alert-info alert-dismissable">
+      <div class="alert alert-info alert-dismissable fade in">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <ul>
         <li>Please choose your top 3 songs by putting a 3 next to the one you want <strong>the most</strong>, followed by 2 and then 1 for your remaining choices. </li>
@@ -95,11 +95,11 @@
                 <div ng-show="songs.length<11" style="margin-top:25px;"> 
                   (Voting disabled until all 11 songs are submitted)</span>
                 </div>
-                <div class="alert alert-danger alert-dismissable" id="voteAlertError" ng-show="voteError" style="margin-top:14px">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <div class="alert alert-danger fade in" id="voteAlertError" ng-show="voteError" style="margin-top:14px">
+                  <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
                   Please make sure you have only voted for 3 songs, and that you voted '3', '2', and '1' once, respectively.
                 </div>
-                <div class="alert alert-success alert-dismissable" id="voteAlertShow" ng-show="votesSubmitted" style="margin-top:14px">
+                <div class="alert alert-success alert-dismissable fade in" id="voteAlertShow" ng-show="votesSubmitted" style="margin-top:14px">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <strong>Ooo Sankayoo!</strong> Your votes have been submitted.
                 </div>
