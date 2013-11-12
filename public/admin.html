@@ -69,6 +69,7 @@
               <li class="active"><a href="#" ng-click="setRandomized()">List</a></li>
               <li><a href="/poll/admin/songs" target="_blank">Songs JSON</a></li>
               <li><a href="/poll/admin/votes" target="_blank">Votes JSON</a></li>
+              <li><a href="/poll/admin/clear" target="_blank">Clear all songs & votes</a></li>
               <!-- <li><a href="#about" data-toggle="modal" data-target="#myModal" ng-show="songs.length < 11">Submit a Song</a></li> -->
             </ul>
           </div><!--/.nav-collapse -->
@@ -81,7 +82,7 @@
         <div class="row">
           <div class="col-md-12">
             <ul class="songlist">
-              <li ng-repeat="song in songs | orderBy: totalVotes">
+              <li ng-repeat="song in songs | orderBy: 'totalVotes'">
                 <div class="col-md-5">
                   
                   <b>{{song.totalVotes}} votes</b> for
