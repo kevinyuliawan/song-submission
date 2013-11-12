@@ -73,6 +73,14 @@
         </div>
       </div>
 
+      <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <p>Please choose your top 3 songs by putting a 3 next to the one you want <strong>the most</strong>, followed by 2 and then 1 for your remaining choices. Leave all the other songs at zero as the votes will all be added up in the end. 
+        <p>Also, be sure to submit a song if you haven't done so already, and make sure you include a YouTube link so that we can easily click and listen to the song. Make sure you include the "http://" part.
+        <p>And please only submit a song and your votes <strong>once</strong>! The site doesn't stop you from doing so but there are server logs, you NF.
+
+      </div>
+
       <div class="alert alert-success alert-dismissable" ng-show="votesSubmitted">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Ooo Sankayoo!</strong> Your votes have been submitted.
@@ -122,10 +130,12 @@
                       <label>YouTube link</label>
                       <input ng-model="newSong.link" type="text" class="form-control">
                     </div>
+                    <!--
                     <div class="form-group">
                       <label>Your name</label>
                       <input ng-model="newSong.username" type="text" class="form-control">
                     </div>
+                    -->
                     <!-- <button class="btn btn-default" type="submit" ng-click="addSong();">Submit song</button> -->
                   </form>
                 </div>
