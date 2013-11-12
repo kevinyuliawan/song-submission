@@ -53,7 +53,7 @@ angular.module('poll1', [])
 			}
 			else{
 				$scope.blankError = $scope.linkError = false;
-				// $scope.submitDisabled = true;
+				$scope.submitDisabled = true;
 				$('#myModal').modal('hide');
 				$http.post('poll/songs', $scope.newSong)
 				.success(function(data, status, headers, config){
@@ -77,7 +77,6 @@ angular.module('poll1', [])
 					$scope.songs = data;
 					$scope.votesSubmitted = true;
 					document.getElementById('voteAlertSuccess').scrollIntoView();
-					// $('#voteAlertSuccess').scrollIntoView(true);
 					console.log(data);
 				}).error(function(data, status, headers, config){
 					// Handle the error
@@ -86,9 +85,6 @@ angular.module('poll1', [])
 			}
 			else{
 				$scope.voteError = true;
-				// document.getElementById('voteAlertError').scrollIntoView(true);
-				// $('#voteAlertError').scrollIntoView(true);
-				// window.scrollTo(0,document.body.scrollHeight);
 			}
 		};
 
@@ -99,34 +95,22 @@ angular.module('poll1', [])
 			for(var i=0;i<songs.length;i++){
 				switch(songs[i].userVote){
 					case 0:
-						total++;
-						break;
+					total++;
+					break;
 					case 1:
-						vote1++;
-						break;
+					vote1++;
+					break;
 					case 2:
-						vote2++;
-						break;
+					vote2++;
+					break;
 					case 3:
-						vote3++;
-						break;
+					vote3++;
+					break;
 				}
 			};
 			if(total != 8 || vote1 > 1 || vote2 > 1 || vote3 > 1){
 				return false;
 			}else { return true; }
 		}
-
-		/* deprecated
-		this.check = function check(option, select){
-			for(var i in this.options){
-				if(this.options[i] == option){
-					this.options.splice(i,1);
-					break;
-				}
-			}
-			console.log('removed '+option);
-		};
-		*/
 
 	});
