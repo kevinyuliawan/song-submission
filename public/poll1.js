@@ -112,7 +112,7 @@ angular.module('poll1', [])
 						break;
 				}
 			};
-			if(total > 8 || vote1 > 1 || vote2 > 1 || vote3 > 1){
+			if(total != 8 || vote1 > 1 || vote2 > 1 || vote3 > 1){
 				return false;
 			}else { return true; }
 		}
