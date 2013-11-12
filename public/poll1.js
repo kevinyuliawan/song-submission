@@ -1,5 +1,37 @@
-angular.module('poll1', [])
-.controller('PollController', function($scope, $http){
+var myApp = angular.module('poll1', [])
+.factory('Songs', ['$http', function($http){
+	var songs = {};
+	songs.query = function(scope){
+		$http.get('poll/songs')
+		.success(function(data, status, headers, config){
+		// Do something successful
+		scope.songs = data;		
+	}).error(function(data, status, headers, config){
+		// Handle the error
+		console.log('$http error');
+	}); };
+
+	return songs;
+}]);
+
+
+myApp.factory('Votes', ['$http', function($http){
+	var votes = {};
+	votes.query = function(scope){
+		$http.get('poll/admin/votes')
+		.success(function(data, status, headers, config){
+		// Do something successful
+		scope.votesCount = data.length;
+	}).error(function(data, status, headers, config){
+		// Handle the error
+		console.log('$http error');
+	}); };
+
+	return votes;
+}]);
+
+
+myApp.controller('PollController', ['Songs', 'Votes', '$scope', '$http', function(Songs,Votes, $scope, $http){
 		/*
 		this.songs = [
 			{title: 'Song 1', artist: 'Artist 1', link: 'http://song1.com', votes: 0},
@@ -8,14 +40,16 @@ angular.module('poll1', [])
 		];
 		*/
 
-
-		$scope.songs = [];
+		Songs.query($scope);
+		Votes.query($scope);
+		// console.log($scope.songs);
+		// $scope.votesCount = Votes.length;
 
 		$(".alert").alert(); // for bootstrap
 
 
 
-
+		/*
 		$http.get('poll/songs')
 		.success(function(data, status, headers, config){
 				// Do something successful
@@ -37,8 +71,9 @@ angular.module('poll1', [])
 				console.log('$http error');
 			});
 		};
+		*/
 
-		getVotes();
+		// getVotes();
 
 		// $scope.options = [,1,2,3];
 
@@ -132,4 +167,4 @@ angular.module('poll1', [])
 			}else { return true; }
 		}
 
-	});
+	}]);
