@@ -89,8 +89,8 @@ angular.module('poll1', [])
 		};
 
 		function checkVotes(){
-			var total, vote1, vote2, vote3;
-			total = vote1 = vote2 = vote3 = 0;
+			var total, vote1, vote2, vote3, other;
+			total = vote1 = vote2 = vote3 = other = 0;
 			var songs = $scope.songs;
 			for(var i=0;i<songs.length;i++){
 				switch(songs[i].userVote){
@@ -106,9 +106,12 @@ angular.module('poll1', [])
 					case 3:
 					vote3++;
 					break;
+					default:
+					other++;
+					break;
 				}
 			};
-			if(total != 8 || vote1 > 1 || vote2 > 1 || vote3 > 1){
+			if(total != 8 || vote1 > 1 || vote2 > 1 || vote3 > 1 || other > 0){
 				return false;
 			}else { return true; }
 		}
