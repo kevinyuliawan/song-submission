@@ -67,7 +67,7 @@ angular.module('poll1', [])
 			}
 			else{
 				$scope.blankError = $scope.linkError = false;
-				// $scope.submitDisabled = true;
+				$scope.submitDisabled = true;
 				$('#myModal').modal('hide');
 				$http.post('poll/songs', $scope.newSong)
 				.success(function(data, status, headers, config){
