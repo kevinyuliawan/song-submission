@@ -8,6 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <script src="http://code.angularjs.org/1.2.0/angular.min.js"></script>
+
 
   <title>CDN Song Submission & Voting</title>
 
@@ -38,6 +40,9 @@
   input.input-vote{
     width:35px;
     margin-right:15px;
+  }
+  body{
+    padding-bottom:50px;
   }
   </style>
 
@@ -76,89 +81,97 @@
       <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <p>Please choose your top 3 songs by putting a 3 next to the one you want <strong>the most</strong>, followed by 2 and then 1 for your remaining choices. Leave all the other songs at zero as the votes will all be added up in the end. 
-        <p>Also, be sure to submit a song if you haven't done so already, and make sure you include a YouTube/SoundCloud/something link so that we can easily click and listen to the song. Make sure you include the "http://" part in the beginning.
-        <p>And please only submit a song and your votes <strong>once</strong>! The site doesn't stop you from doing so but there are server logs, you NF.
+          <p>Also, be sure to submit a song if you haven't done so already, and make sure you include a YouTube/SoundCloud/something link so that we can easily click and listen to the song. Make sure you include the "http://" part in the beginning.
+            <p>And please only submit a song and your votes <strong>once</strong>! The site doesn't stop you from doing so but there are server logs, you NF.
 
-      </div>
+            </div>
 
-      <div class="alert alert-success alert-dismissable" ng-show="votesSubmitted">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Ooo Sankayoo!</strong> Your votes have been submitted.
-      </div>
+            <div class="container">
 
-      <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="songlist">
+                    <li ng-repeat="song in songs">
+                      <div class="col-md-5">
+                        {{$index+1}}.
+                        <input type="number" ng-model="song.userVote" min="0" max="3" class="input-vote"></input>
+                        <b>{{song.title}}</b> by <b>{{song.artist}}</b>
+                      </div>
+                      <div class="col-md-4">
+                        <span class="glyphicon glyphicon-play"></span> <a ng-href="{{song.link}}" target="_blank">{{song.link}}</a>
+                      </div>
+                    </li>
 
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="songlist">
-              <li ng-repeat="song in songs">
-                <div class="col-md-5">
-                  {{$index+1}}.
-                  <input type="number" ng-model="song.userVote" min="0" max="3" class="input-vote"></input>
-                  <b>{{song.title}}</b> by <b>{{song.artist}}</b>
-                </div>
-                <div class="col-md-4">
-                  <span class="glyphicon glyphicon-play"></span> <a ng-href="{{song.link}}" target="_blank">{{song.link}}</a>
-                </div>
-              </li>
-
-            </ul>
-            <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes</button> 
-            <div ng-show="songs.length<11" style="margin-top:10px;"> (Voting disabled until all 11 songs are submitted)</span></div>
-          </div>
-          
-
-
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel">Song Submission</h4>
-                </div>
-                <div class="modal-body">
-                  <form role="form">
-                    <div class="form-group">
-                      <label>Title</label>
-                      <input ng-model="newSong.title" type="text" class="form-control">
+                  </ul>
+                  <div class="col-md-2">
+                    <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes</button> 
+                  </div>
+                  <div class="col-md-10">
+                    <div ng-show="songs.length<11" style="margin-top:10px;"> (Voting disabled until all 11 songs are submitted)</span></div>
+                    <div class="alert alert-danger alert-dismissable" id="voteAlertError" ng-show="voteError" style="margin-top:14px">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      Please make sure you have only voted for 3 songs, and that you voted '3', '2', and '1' once, respectively.
                     </div>
-                    <div class="form-group">
-                      <label>Artist</label>
-                      <input ng-model="newSong.artist" type="text" class="form-control">
+                    <div class="alert alert-success alert-dismissable" id="voteAlertShow" ng-show="votesSubmitted" style="margin-top:14px">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <strong>Ooo Sankayoo!</strong> Your votes have been submitted.
                     </div>
-                    <div class="form-group">
-                      <label>YouTube link</label>
-                      <input ng-model="newSong.link" type="text" class="form-control">
-                    </div>
+                  </div>
+                </div>
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Song Submission</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form role="form">
+                          <div class="form-group">
+                            <label>Title</label>
+                            <input ng-model="newSong.title" type="text" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>Artist</label>
+                            <input ng-model="newSong.artist" type="text" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>Song link</label>
+                            <input ng-model="newSong.link" type="text" class="form-control" placeholder="e.g. http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                          </div>
                     <!--
                     <div class="form-group">
                       <label>Your name</label>
                       <input ng-model="newSong.username" type="text" class="form-control">
                     </div>
-                    -->
-                    <!-- <button class="btn btn-default" type="submit" ng-click="addSong();">Submit song</button> -->
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" ng-click="addSong();" data-dismiss="modal">Submit song</button>
-                </div>
-              </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-          </div><!-- /.modal -->
+                  -->
+                  <!-- <button class="btn btn-default" type="submit" ng-click="addSong();">Submit song</button> -->
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addSong();" ng-disabled="submitDisabled">Submit song</button>
+              </div>
+              <div class="alert alert-danger" ng-show="blankError">Please make sure all fields are filled out.</div>
+              <div class="alert alert-danger" ng-show="linkError">Please make sure the link has 'http://' in the front of it.</div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-        </div><!-- /.controller -->
+      </div><!-- /.controller -->
 
-      </div><!-- /.container -->
+    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="poll1.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <script src="http://code.angularjs.org/1.2.0/angular.min.js"></script>
-    <script src="poll1.js"></script>
   </body>
   </html>
