@@ -28,10 +28,10 @@ angular.module('poll1', [])
 
 		
 		$scope.newSong = {
-			title:"Song 3",
-			artist:"Artist 3",
-			link:"http://song3.com",
-			username: "Franklin",
+			title:"",
+			artist:"",
+			link:"",
+			username: "",
 			userVote:0,
 			totalVotes:0
 		};

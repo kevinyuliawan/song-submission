@@ -2,6 +2,7 @@ var songs = [];
 
 var votes = [];
 
+
 songs.push({
 	title: 'Song 1',
 	artist: 'Artist 1',
@@ -19,6 +20,7 @@ songs.push({
 	userVote: 0,
 	totalVotes: 0
 });
+
 
 var options = [];
 
@@ -85,4 +87,10 @@ exports.getAdminVotes = function(req, res){
 
 exports.getAdminSongs = function(req, res){
 	res.send(songs);
+}
+
+exports.getAdminClear = function(req, res){
+	songs = [];
+	votes = [];
+	res.send("All songs and vote submissions have been cleared!");
 }

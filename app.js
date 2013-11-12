@@ -38,6 +38,7 @@ app.post('/poll/songs', poll.postSongs);
 app.post('/poll/votes', poll.postVotes);
 app.get('/poll/admin/songs', poll.getAdminSongs);
 app.get('/poll/admin/votes', poll.getAdminVotes);
+app.get('/poll/admin/clear', poll.getAdminClear);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
