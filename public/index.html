@@ -89,9 +89,9 @@
 
               </ul>
               <div class="col-md-2">
-                <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes</button> 
+                <button class="btn btn-primary" ng-click="submitVote();" style="margin-top:20px" ng-disabled="songs.length<11">Submit your votes ({{votesCount}}/11)</button> 
               </div>
-              <div class="col-md-10">
+              <div class="col-md-10" style="padding-left:30px">
                 <div ng-show="songs.length<11" style="margin-top:25px;"> 
                   (Voting disabled until all 11 songs are submitted)</span>
                 </div>

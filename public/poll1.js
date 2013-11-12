@@ -26,6 +26,20 @@ angular.module('poll1', [])
 				console.log('$http error');
 			});
 
+			function getVotes() {
+				$http.get('poll/admin/votes')
+				.success(function(data, status, headers, config){
+				// Do something successful
+				$scope.votesCount = data.length;
+				console.log(data);
+			}).error(function(data, status, headers, config){
+				// Handle the error
+				console.log('$http error');
+			});
+		};
+
+		getVotes();
+
 		// $scope.options = [,1,2,3];
 
 		
@@ -53,7 +67,7 @@ angular.module('poll1', [])
 			}
 			else{
 				$scope.blankError = $scope.linkError = false;
-				$scope.submitDisabled = true;
+				// $scope.submitDisabled = true;
 				$('#myModal').modal('hide');
 				$http.post('poll/songs', $scope.newSong)
 				.success(function(data, status, headers, config){
@@ -75,8 +89,8 @@ angular.module('poll1', [])
 				.success(function(data, status, headers, config){
 					// Do something successful
 					$scope.songs = data;
+					getVotes();
 					$scope.votesSubmitted = true;
-					document.getElementById('voteAlertSuccess').scrollIntoView();
 					console.log(data);
 				}).error(function(data, status, headers, config){
 					// Handle the error
